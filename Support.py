@@ -2,21 +2,50 @@
 # Support
 # Part of the Library: Sequential Regression Extrapolation
 # Julie Butler Hartley
-# Version 1.0.0
+# Version 1.1.0
 # Date Created: February 28, 2021
-# Last Modified: February 28, 2021
-# #################################################
+# Last Modified: May 27, 2022
+#
+# A collection of functions that perform support function for the sequential
+# regression extrapolation analysis.
+##################################################
 
 ##############################
+##          OUTLINE         ##
+##############################
 # IMPORTS
-# #############################
+# RMSE (Root Mean-Squared Error)
+# FORMAT SEQUENTIAL DATA
+# FORMAT DATA FROM FILE
+# GENERATE POLYNOMIAL RANDOM NOISE
+
+##############################
+##          IMPORTS         ##
+##############################
 # THIRD-PARTY IMPORTS
 import csv
 import numpy as np
 
+
 ##############################
-# FORMAT SEQUENTIAL DATA
-# #############################
+##           RMSE           ##
+##############################
+# Define a function that calculated the RMSE of two arrays
+def rmse(A, B):
+    """
+        Inputs:
+            A,B (NumPy arrays): the data sets to determine the root mean squared error of
+        Returns:
+            Unnamed (a float): the root menas squared error between data sets A and B
+        Computes the root mean squared error (RMSE) between the two given data sets.
+    """
+    assert len(A)==len(B), "The data sets must be the same length to calculate the RMSE."
+    return np.sqrt(np.mean((A-B)**2))
+
+
+##############################
+##  FORMAT SEQUENTIAL DATA  ##
+##############################
 def format_sequential_data (y, seq=2):
     """
         Inputs:
@@ -57,9 +86,9 @@ def format_sequential_data (y, seq=2):
 
 
 ##############################
-# FORMAT DATA
-# #############################
-def formatData (filename, delimiter):
+##        FORMAT DATA       ##
+##############################
+def format_data_from_file (filename, delimiter):
     """
         Inputs:
             filename (a string): a file name representing the file where
@@ -92,9 +121,9 @@ def formatData (filename, delimiter):
     return np.asarray(formattedData)
 
 
-##############################
-# GENERATE POLYNOMIAL RANDOM NOISE
-# #############################
+########################################
+##  GENERATE POLYNOMIAL RANDOM NOISE  ##
+########################################
 def generate_polynomial_random_noise (degree, coef, num_points):
     """
         Inputs:
